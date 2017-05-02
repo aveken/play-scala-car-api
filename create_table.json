@@ -1,0 +1,70 @@
+{
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "Id",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "Title",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "Price",
+      "AttributeType": "N"
+    }
+  ],
+  "TableName": "CarAdvert",
+  "KeySchema": [
+    {
+      "AttributeName": "Id",
+      "KeyType": "HASH"
+    }
+  ],
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "title_idx",
+      "KeySchema": [
+        {
+          "AttributeName": "Title",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "Id",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "KEYS_ONLY"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 10,
+        "WriteCapacityUnits": 10
+      }
+    },
+    {
+      "IndexName": "price_idx",
+      "KeySchema": [
+        {
+          "AttributeName": "Price",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "Id",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "KEYS_ONLY"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 10,
+        "WriteCapacityUnits": 10
+      }
+    }
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 10,
+    "WriteCapacityUnits": 10
+  }
+}
